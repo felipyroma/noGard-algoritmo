@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>
+        No Gard
+    </h1>
+
+    Digite o seu nome: <input id="ipt_nome" type="text"> <br><br>
+
+    Digite a cor da sua faixa: <input id="ipt_faixa" type="text"> <br><br>
+
+    Digite a quantidade de vitórias com essa faixa: <input id="ipt_vitoria" type="text"> <br><br>
+
+    Digite a cor de derrotas com essa faixa: <input id="ipt_derrota" type="text"><br><br>
+
+    Digite a cor de empates com essa faixa: <input id="ipt_empate" type="text"><br><br>
+
+    <button onclick="calcular()"> Calcular </button> <br><br>
+
+    <div id="res"></div>
+
+</body>
+
+<script>
+
+    function calcular() {
+        var nome = ipt_nome.value
+        var faixa = ipt_faixa.value
+
+        var vitoria = Number(ipt_vitoria.value)
+        var derrota = Number(ipt_derrota.value)
+        var empate = Number(ipt_empate.value)
+
+        var qtdLutas = vitoria + derrota + empate
+
+        var pontosConquistados = 0
+
+        // primeira linha
+        if (faixa == 'branca') {
+            var pontoInicial = 0 // mudar valor
+            var pontoPorVitoria = 4 * vitoria // mudar valor
+            var descontoPorDerrota = (0.5 * 4) * derrota // mudar o valor
+            var somaEmpate = empate * 2
+            var pontosPositivos = pontoInicial + pontoPorVitoria + somaEmpate
+            console.log(`pontos positivos`, pontosPositivos)
+
+            var vitoriaEmpate = pontoPorVitoria + somaEmpate
+
+            var pontoFinal = pontosPositivos - descontoPorDerrota
+            if (pontoFinal > 0) { // mudar valor
+                var PercentualPontosIniciais = (pontoInicial / pontoFinal) * 100
+                var PercentualPontosFinais = 100 - PercentualPontosIniciais
+            } else {
+                var PercentualPontosIniciais = 100
+                var PercentualPontosFinais = 0
+            }
+            console.log(PercentualPontosIniciais)
+
+            res.innerHTML = `${nome} da faixa ${faixa} tem ${pontoFinal} pontos, sendo ${PercentualPontosIniciais}% dos pontos iniciais da faixa e ${PercentualPontosFinais}% em pontos conquistados em lutas <br> <br>`
+
+
+            // segunda linha
+            var derrotaEmpate = derrota + empate
+            var PercentualVitorias = (vitoria / qtdLutas) * 100
+            var PercentualDerrotasEmpates = (derrotaEmpate / qtdLutas) * 100
+
+            res.innerHTML += `Total de lutas: ${qtdLutas}, sendo ${PercentualVitorias.toFixed(1)}% vitórias e ${PercentualDerrotasEmpates.toFixed(1)}% derrotas ou empates <br><br>`
+
+            // terceira linha
+            var vitoriasTdsLutas = qtdLutas * 4
+            var PercentualVitoriaTotal = (pontoFinal / vitoriasTdsLutas) * 100
+
+            res.innerHTML += `Se ${nome} tivesse vitória em todas as lutas ele teria ${vitoriasTdsLutas} pontos, hoje ele tem ${PercentualVitoriaTotal}% do total`
+
+
+            // faixa azul
+        } else if (faixa == 'azul') {
+            var pontoInicial = 1000 // mudar valor
+            var pontoPorVitoria = 10 * vitoria // mudar valor
+            var descontoPorDerrota = (0.5 * 10) * derrota //  mudar valor
+            var somaEmpate = empate * 2
+            var pontosPositivos = pontoInicial + pontoPorVitoria + somaEmpate
+            console.log(`pontos positivos`, pontosPositivos)
+
+            var vitoriaEmpate = pontoPorVitoria + somaEmpate
+
+            var pontoFinal = pontosPositivos - descontoPorDerrota
+            if (pontoFinal > 1000) { // mudar valor
+                var PercentualPontosIniciais = (pontoInicial / pontoFinal) * 100
+                var PercentualPontosFinais = 100 - PercentualPontosIniciais
+            } else {
+                var PercentualPontosIniciais = 100
+                var PercentualPontosFinais = 0
+            }
+
+            console.log(pontoFinal)
+            console.log(PercentualPontosIniciais)
+
+            res.innerHTML = `${nome} da faixa ${faixa} tem ${pontoFinal} pontos, sendo ${PercentualPontosIniciais.toFixed(1)}% dos pontos iniciais da faixa e ${PercentualPontosFinais.toFixed(1)}% em pontos conquistados em lutas <br> <br>`
+
+
+            // segunda linha
+            var derrotaEmpate = derrota + empate
+            var PercentualVitorias = (vitoria / qtdLutas) * 100
+            var PercentualDerrotasEmpates = (derrotaEmpate / qtdLutas) * 100
+
+            res.innerHTML += `Total de lutas: ${qtdLutas}, sendo ${PercentualVitorias.toFixed(1)}% vitórias e ${PercentualDerrotasEmpates.toFixed(1)}% derrotas ou empates <br><br>`
+
+            // terceira linha
+            var vitoriasTdsLutas = (qtdLutas * 10) + 1000 // mudar valor
+            var PercentualVitoriaTotal = (pontoFinal / vitoriasTdsLutas) * 100
+
+            res.innerHTML += `Se ${nome} tivesse vitória em todas as lutas ele teria ${vitoriasTdsLutas} pontos, hoje ele tem ${PercentualVitoriaTotal.toFixed(1)}% do total`
+
+
+
+            // faixa amarela
+        } else if (faixa == 'amarela') {
+            var pontoInicial = 2000 // mudar valor
+            var pontoPorVitoria = 30 * vitoria // mudar valor
+            var descontoPorDerrota = (0.5 * 30) * derrota //  mudar valor
+            var somaEmpate = empate * 2
+            var pontosPositivos = pontoInicial + pontoPorVitoria + somaEmpate
+            console.log(`pontos positivos`, pontosPositivos)
+
+            var vitoriaEmpate = pontoPorVitoria + somaEmpate
+
+            var pontoFinal = pontosPositivos - descontoPorDerrota
+            if (pontoFinal > 2000) { // mudar valor
+                var PercentualPontosIniciais = (pontoInicial / pontoFinal) * 100
+                var PercentualPontosFinais = 100 - PercentualPontosIniciais
+            } else {
+                var PercentualPontosIniciais = 100
+                var PercentualPontosFinais = 0
+            }
+
+
+            console.log(pontoFinal)
+            console.log(PercentualPontosIniciais)
+
+            res.innerHTML = `${nome} da faixa ${faixa} tem ${pontoFinal} pontos, sendo ${PercentualPontosIniciais.toFixed(1)}% dos pontos iniciais da faixa e ${PercentualPontosFinais.toFixed(1)}% em pontos conquistados em lutas <br> <br>`
+
+
+            // segunda linha
+            var derrotaEmpate = derrota + empate
+            var PercentualVitorias = (vitoria / qtdLutas) * 100
+            var PercentualDerrotasEmpates = (derrotaEmpate / qtdLutas) * 100
+
+            res.innerHTML += `Total de lutas: ${qtdLutas}, sendo ${PercentualVitorias.toFixed(1)}% vitórias e ${PercentualDerrotasEmpates.toFixed(1)}% derrotas ou empates <br><br>`
+
+            // terceira linha
+            var vitoriasTdsLutas = (qtdLutas * 30) + 2000 // mudar valor
+            var PercentualVitoriaTotal = (pontoFinal / vitoriasTdsLutas) * 100
+
+            res.innerHTML += `Se ${nome} tivesse vitória em todas as lutas ele teria ${vitoriasTdsLutas} pontos, hoje ele tem ${PercentualVitoriaTotal.toFixed(1)}% do total`
+
+
+
+            // faixa laranja
+        } else if (faixa == 'laranja') {
+            var pontoInicial = 5000 // mudar valor
+            var pontoPorVitoria = 60 * vitoria // mudar valor
+            var descontoPorDerrota = (0.5 * 60) * derrota //  mudar valor
+            var somaEmpate = empate * 2
+            var pontosPositivos = pontoInicial + pontoPorVitoria + somaEmpate
+            console.log(`pontos positivos`, pontosPositivos)
+
+            var vitoriaEmpate = pontoPorVitoria + somaEmpate
+
+            var pontoFinal = pontosPositivos - descontoPorDerrota
+            if (pontoFinal > 5000) { // mudar valor
+                var PercentualPontosIniciais = (pontoInicial / pontoFinal) * 100
+                var PercentualPontosFinais = 100 - PercentualPontosIniciais
+            } else {
+                var PercentualPontosIniciais = 100
+                var PercentualPontosFinais = 0
+            }
+
+
+            console.log(pontoFinal)
+            console.log(PercentualPontosIniciais)
+
+            res.innerHTML = `${nome} da faixa ${faixa} tem ${pontoFinal} pontos, sendo ${PercentualPontosIniciais.toFixed(1)}% dos pontos iniciais da faixa e ${PercentualPontosFinais.toFixed(1)}% em pontos conquistados em lutas <br> <br>`
+
+
+            // segunda linha
+            var derrotaEmpate = derrota + empate
+            var PercentualVitorias = (vitoria / qtdLutas) * 100
+            var PercentualDerrotasEmpates = (derrotaEmpate / qtdLutas) * 100
+
+            res.innerHTML += `Total de lutas: ${qtdLutas}, sendo ${PercentualVitorias.toFixed(1)}% vitórias e ${PercentualDerrotasEmpates.toFixed(1)}% derrotas ou empates <br><br>`
+
+            // terceira linha
+            var vitoriasTdsLutas = (qtdLutas * 60) + 5000 // mudar valor
+            var PercentualVitoriaTotal = (pontoFinal / vitoriasTdsLutas) * 100
+
+            res.innerHTML += `Se ${nome} tivesse vitória em todas as lutas ele teria ${vitoriasTdsLutas} pontos, hoje ele tem ${PercentualVitoriaTotal.toFixed(1)}% do total`
+
+
+        // faixa verde
+        } else if (faixa == 'verde') {
+            var pontoInicial = 10000 // mudar valor
+            var pontoPorVitoria = 100 * vitoria // mudar valor
+            var descontoPorDerrota = (0.5 * 100) * derrota //  mudar valor
+            var somaEmpate = empate * 2
+            var pontosPositivos = pontoInicial + pontoPorVitoria + somaEmpate
+            console.log(`pontos positivos`, pontosPositivos)
+
+            var vitoriaEmpate = pontoPorVitoria + somaEmpate
+
+            var pontoFinal = pontosPositivos - descontoPorDerrota
+            if (pontoFinal > 10000) { // mudar valor
+                var PercentualPontosIniciais = (pontoInicial / pontoFinal) * 100
+                var PercentualPontosFinais = 100 - PercentualPontosIniciais
+            } else {
+                var PercentualPontosIniciais = 100
+                var PercentualPontosFinais = 0
+            }
+
+
+            console.log(pontoFinal)
+            console.log(PercentualPontosIniciais)
+
+            res.innerHTML = `${nome} da faixa ${faixa} tem ${pontoFinal} pontos, sendo ${PercentualPontosIniciais.toFixed(1)}% dos pontos iniciais da faixa e ${PercentualPontosFinais.toFixed(1)}% em pontos conquistados em lutas <br> <br>`
+
+
+            // segunda linha
+            var derrotaEmpate = derrota + empate
+            var PercentualVitorias = (vitoria / qtdLutas) * 100
+            var PercentualDerrotasEmpates = (derrotaEmpate / qtdLutas) * 100
+
+            res.innerHTML += `Total de lutas: ${qtdLutas}, sendo ${PercentualVitorias.toFixed(1)}% vitórias e ${PercentualDerrotasEmpates.toFixed(1)}% derrotas ou empates <br><br>`
+
+            // terceira linha
+            var vitoriasTdsLutas = (qtdLutas * 100) + 10000 // mudar valor
+            var PercentualVitoriaTotal = (pontoFinal / vitoriasTdsLutas) * 100
+
+            res.innerHTML += `Se ${nome} tivesse vitória em todas as lutas ele teria ${vitoriasTdsLutas} pontos, hoje ele tem ${PercentualVitoriaTotal.toFixed(1)}% do total`
+
+
+
+        // faixa roxa
+        } else if (faixa == 'roxa') {
+            var pontoInicial = 15000 // mudar valor
+            var pontoPorVitoria = 150 * vitoria // mudar valor
+            var descontoPorDerrota = (0.5 * 150) * derrota //  mudar valor
+            var somaEmpate = empate * 2
+            var pontosPositivos = pontoInicial + pontoPorVitoria + somaEmpate
+            console.log(`pontos positivos`, pontosPositivos)
+
+            var vitoriaEmpate = pontoPorVitoria + somaEmpate
+
+            var pontoFinal = pontosPositivos - descontoPorDerrota
+            if (pontoFinal > 15000) {
+                var PercentualPontosIniciais = (pontoInicial / pontoFinal) * 100
+                var PercentualPontosFinais = 100 - PercentualPontosIniciais
+            } else {
+                var PercentualPontosIniciais = 100
+                var PercentualPontosFinais = 0
+            }
+
+
+            console.log(pontoFinal)
+            console.log(PercentualPontosIniciais)
+
+            res.innerHTML = `${nome} da faixa ${faixa} tem ${pontoFinal} pontos, sendo ${PercentualPontosIniciais.toFixed(1)}% dos pontos iniciais da faixa e ${PercentualPontosFinais.toFixed(1)}% em pontos conquistados em lutas <br> <br>`
+
+
+            // segunda linha
+            var derrotaEmpate = derrota + empate
+            var PercentualVitorias = (vitoria / qtdLutas) * 100
+            var PercentualDerrotasEmpates = (derrotaEmpate / qtdLutas) * 100
+
+            res.innerHTML += `Total de lutas: ${qtdLutas}, sendo ${PercentualVitorias.toFixed(1)}% vitórias e ${PercentualDerrotasEmpates.toFixed(1)}% derrotas ou empates <br><br>`
+
+            // terceira linha
+            var vitoriasTdsLutas = (qtdLutas * 150) + 15000 // mudar valor
+            var PercentualVitoriaTotal = (pontoFinal / vitoriasTdsLutas) * 100
+
+            res.innerHTML += `Se ${nome} tivesse vitória em todas as lutas ele teria ${vitoriasTdsLutas} pontos, hoje ele tem ${PercentualVitoriaTotal.toFixed(1)}% do total`
+
+
+
+        // faixa marrom
+        } else if (faixa == 'marrom') {
+            var pontoInicial = 25000 // mudar valor
+            var pontoPorVitoria = 300 * vitoria // mudar valor
+            var descontoPorDerrota = (0.5 * 300) * derrota //  mudar valor
+            var somaEmpate = empate * 2
+            var pontosPositivos = pontoInicial + pontoPorVitoria + somaEmpate
+            console.log(`pontos positivos`, pontosPositivos)
+
+            var vitoriaEmpate = pontoPorVitoria + somaEmpate
+
+            var pontoFinal = pontosPositivos - descontoPorDerrota
+            if (pontoFinal > 25000) {
+                var PercentualPontosIniciais = (pontoInicial / pontoFinal) * 100
+                var PercentualPontosFinais = 100 - PercentualPontosIniciais
+            } else {
+                var PercentualPontosIniciais = 100
+                var PercentualPontosFinais = 0
+            }
+
+
+            console.log(pontoFinal)
+            console.log(PercentualPontosIniciais)
+
+            res.innerHTML = `${nome} da faixa ${faixa} tem ${pontoFinal} pontos, sendo ${PercentualPontosIniciais.toFixed(1)}% dos pontos iniciais da faixa e ${PercentualPontosFinais.toFixed(1)}% em pontos conquistados em lutas <br> <br>`
+
+
+            // segunda linha
+            var derrotaEmpate = derrota + empate
+            var PercentualVitorias = (vitoria / qtdLutas) * 100
+            var PercentualDerrotasEmpates = (derrotaEmpate / qtdLutas) * 100
+
+            res.innerHTML += `Total de lutas: ${qtdLutas}, sendo ${PercentualVitorias.toFixed(1)}% vitórias e ${PercentualDerrotasEmpates.toFixed(1)}% derrotas ou empates <br><br>`
+
+            // terceira linha
+            var vitoriasTdsLutas = (qtdLutas * 300) + 25000 // mudar valor
+            var PercentualVitoriaTotal = (pontoFinal / vitoriasTdsLutas) * 100
+
+            res.innerHTML += `Se ${nome} tivesse vitória em todas as lutas ele teria ${vitoriasTdsLutas} pontos, hoje ele tem ${PercentualVitoriaTotal.toFixed(1)}% do total`
+
+
+
+        // faixa preta
+        } else if (faixa == 'preta') {
+            var pontoInicial = 50000 // mudar valor
+            var pontoPorVitoria = 500 * vitoria // mudar valor
+            var descontoPorDerrota = (0.5 * 500) * derrota //  mudar valor
+            var somaEmpate = empate * 2
+            var pontosPositivos = pontoInicial + pontoPorVitoria + somaEmpate
+            console.log(`pontos positivos`, pontosPositivos)
+
+            var vitoriaEmpate = pontoPorVitoria + somaEmpate
+
+            var pontoFinal = pontosPositivos - descontoPorDerrota
+            if (pontoFinal > 50000) {
+                var PercentualPontosIniciais = (pontoInicial / pontoFinal) * 100
+                var PercentualPontosFinais = 100 - PercentualPontosIniciais
+            } else {
+                var PercentualPontosIniciais = 100
+                var PercentualPontosFinais = 0
+            }
+
+
+            console.log(pontoFinal)
+            console.log(PercentualPontosIniciais)
+
+            res.innerHTML = `${nome} da faixa ${faixa} tem ${pontoFinal} pontos, sendo ${PercentualPontosIniciais.toFixed(1)}% dos pontos iniciais da faixa e ${PercentualPontosFinais.toFixed(1)}% em pontos conquistados em lutas <br> <br>`
+
+
+            // segunda linha
+            var derrotaEmpate = derrota + empate
+            var PercentualVitorias = (vitoria / qtdLutas) * 100
+            var PercentualDerrotasEmpates = (derrotaEmpate / qtdLutas) * 100
+
+            res.innerHTML += `Total de lutas: ${qtdLutas}, sendo ${PercentualVitorias.toFixed(1)}% vitórias e ${PercentualDerrotasEmpates.toFixed(1)}% derrotas ou empates <br><br>`
+
+            // terceira linha
+            var vitoriasTdsLutas = (qtdLutas * 500) + 50000 // mudar valor
+            var PercentualVitoriaTotal = (pontoFinal / vitoriasTdsLutas) * 100
+
+            res.innerHTML += `Se ${nome} tivesse vitória em todas as lutas ele teria ${vitoriasTdsLutas} pontos, hoje ele tem ${PercentualVitoriaTotal.toFixed(1)}% do total`
+
+        }
+
+
+    }
+
+
+</script>
+
+</html>
